@@ -29,11 +29,11 @@ if __name__ == "__main__" and music_name is not None:
     
     
     if isMusicLoad:
-        music = Music(data_music, sample_rate)
         
         # tratamento do name da musica
         music_name = music_name.split(".")[0] # Pega apenas a musica sem a extensao
         music_name = "_".join(music_name.split(" ")) # Tira os espacos e substitui por "_"
+        music = Music(data_music, sample_rate, music_name)
 
         plot_response = "" # Resposta do plot 
         while(True):
@@ -49,7 +49,7 @@ if __name__ == "__main__" and music_name is not None:
             if response == 1:
                 print("\nGerando gráfico...")
                 
-                path = music.frequenceGraph(music_name)
+                path = music.frequenceGraph()
         
                 plot_response = f"Gráfico gerado com suscesso. Salvo em: {path}"
             
@@ -58,7 +58,7 @@ if __name__ == "__main__" and music_name is not None:
                 
                 print("\nGerando espectograma...")
                 #Cria o spectograma da musica
-                path = music.spectogram(music_name, time)
+                path = music.spectogram(time)
                 
                 plot_response = f"Espectograma gerado com suscesso. Salvo em: {path}"
                 
