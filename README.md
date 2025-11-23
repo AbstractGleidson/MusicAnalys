@@ -7,7 +7,7 @@ $$x[n], \; n = 0, 1, 2, \ldots, N-1$$
 A taxa de amostragem define quantas amostras existem por segundo:
 
 $$
-f_s = \text{sample\_rate}
+f_s = \text{sample rate}
 $$
 
 A duração do áudio é:
@@ -20,8 +20,9 @@ $$
 Mesmo que:
 
 $$
-T = \frac{f_s}{N}
+T = \frac{N} {f_s}
 $$
+
 ---
 
 # 2. Normalização do Sinal
@@ -54,6 +55,7 @@ $$
 
 # 4. Espectograma - STFT (Short-Time Fourier Transform)
 O espectrograma aplica a FFT em janelas ao longo do tempo:
+
 $$
 X_m[k] = \sum_{n=0}^{L-1} x[n + mH]\; w[n]\; e^{-j \frac{2\pi kn}{L}}
 $$
