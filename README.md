@@ -43,9 +43,9 @@ $$
 X[k] = \sum_{n=0}^{N-1} x[n] \, e^{-j \frac{2\pi kn}{N}}
 $$
 
-$
-\text{Cada } X[k] \text{ indica a quantidade de energia presente na frequência } f_k.
-$
+
+Cada $X[k]$ indica a quantidade de energia presente na frequência  $f_k$.
+
 
 As frequências associadas aos índices:
 
@@ -67,11 +67,13 @@ Onde:
 
 
 A matriz resultante:
+
 $$
 S(k,m) = |X_m[k]|^2
 $$
 
 Depois convertida para decibéis:
+
 $$
 S_{\mathrm{dB}} = 10 \log_{10}(S)
 $$
