@@ -12,9 +12,9 @@ class Music:
         self._music_duration = len(self._data_music) / self._sample_rate # Duracao da música em segundos
         
         # Parametros do espectograma
-        self.f = None
-        self.t = None
-        self.Sxx = None
+        self.freq = None # Janelas de frequencias
+        self.time = None # Janelas de tempo
+        self.freq_time = None # Matriz da frequencia x tempo
 
     def getDataMusic(self):
         return self._data_music
@@ -43,10 +43,10 @@ class Music:
         max_samples = max_duration * self._sample_rate # Quantidade maxima de amostras
         data = self._data_music[:max_samples] # Fatia a quantidade de amostras, para as primeiras ate max_samples
 
-        if self.f is None:
+        if self.freq is None:
 
             # Gera espectograma
-            self.f, self.t, self.Sxx = spectrogram(
+            self.freq, self.time, self.freq_time = spectrogram(
                 data, # amostras
                 self._sample_rate, # quantidade de amostras por segundos
                 nperseg=1024, 
@@ -54,17 +54,17 @@ class Music:
                 scaling='density'
             )
 
-            self.Sxx = 10 * numpy.log10(self.Sxx + 1e-10) # Converte 
+            self.freq_time = 10 * numpy.log10(self.freq_time + 1e-10) # Converte para db
 
         # Configura o plot do espectograma
         plt.figure(figsize=(12, 5))
-        plt.pcolormesh(self.t, self.f, self.Sxx, shading='gouraud')
+        plt.pcolormesh(self.time, self.freq, self.freq_time, shading='gouraud')
         plt.title(f"Espectrograma {name_music}")
         plt.ylabel("Frequência (Hz)")
         plt.xlabel("Tempo (s)")
         plt.colorbar(label="Intensidade (dB)")
         plt.tight_layout()
-        plt.savefig(path_espec)
+        plt.savefig(path_espec, dpi=600, bbox_inches="tight")
         plt.close()
 
         return path_espec
@@ -85,7 +85,7 @@ class Music:
         plt.ylabel("Intensidade")
         plt.grid(True)
         plt.tight_layout()
-        plt.savefig(path_fft)
+        plt.savefig(path_fft, dpi=600, bbox_inches="tight")
         plt.close()
         
         return path_fft
